@@ -153,12 +153,13 @@ candidate_labels = ["xor", "majority", "parity_onemax", "parity_leadingones",
            "smooth4_parity_leadingones", "smooth8_parity_leadingones"]
 for label in candidate_labels:
   for num_critical_attributes in candidate_num_critical_attributes:
-    for num_useless_attributes in [0]:
-    # for num_useless_attributes in range(num_critical_attributes * 2):  DO NOT SUBMIT
-      # Real (very slow, to be distributed) case.
+    for num_useless_attributes in [0, num_critical_attributes]:
+      # Real (very slow, to be distributed) case, 3^num_critical_attributes
+      # examples:
       # n = 3**num_critical_attributes
       # More realistic, on a single computer.
       n = 100
+
       data = generate_dataset(label, num_critical_attributes,
           num_useless_attributes, n)
       with open(label + "_dim" + str(num_critical_attributes) + "_" + str(
